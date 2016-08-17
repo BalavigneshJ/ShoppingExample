@@ -142,6 +142,15 @@
    				font-weight: 300;
 			}
 
+			.score{
+				font-size: 13px;
+				display: block;
+				text-align: center;
+   				font-weight: 300;
+				background: #206aa1;
+				color: #fff;
+			}
+
 			@keyframes rotate {
 				0% {
 					transform: rotate(0deg);
@@ -213,31 +222,32 @@
 			});
 		</script>
 		<body>
-			<div id="loader">
-				 <div class="spinner"></div>
-			</div>
-		    <div id="main">
-			 <div id="title">
+		<div id="loader">
+			<div class="spinner"></div>
+		</div>
+		<div id="main">
+			<div id="title">
 				<span><h1>My Shopping</h1></span>
 				<div class="select">
 					<label>Category:</label>
-				<select id="category">
-                        <option>All</option>
-				</select>
+					<select id="category">
+						<option id="all">All</option>
+					</select>
 					<label>Sort:</label>
 
-				<select id="filter">
-                        <option id="all">None</option>
-                        <option id="price">Price</option>
-                        <option id="score">Score</option>
-				</select>
+					<select id="filter">
+						<option id="none">None</option>
+						<option id="price">Price</option>
+						<option id="score">Score</option>
+					</select>
 				</div>
-			 </div>
-			 <div id="content">
-			 </div>
-		    </div>
+			</div>
+			<div id="content">
+			</div>
+		</div>
 		</body>
 	</head>
 </html>
+
 
 

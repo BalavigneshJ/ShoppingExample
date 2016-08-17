@@ -14,7 +14,8 @@
 
 			Main.content = $(document).find("#content") ;
 			Main.types = [] ;
-			Main.renderAll(data.products);
+			Main.all = data.products ;
+			Main.renderAll();
 		},
 
 		renderWithCategory : function(ev){
@@ -32,7 +33,7 @@
 			}else if(filter === "score"){
 				Main.renderer(Main[cat].sort(Main.sortScore));
 			}else{
-				Main.renderer(Main[cat]);
+				Main.renderer(Main[cat].sort(Main.sortId));
 			}
 		},
 
@@ -42,6 +43,10 @@
 		
 		sortScore : function(a,b){
 			return Main.sortFun(a , b , 'score')
+		},
+
+		sortId : function(a,b){
+			return Main.sortFun(a , b , 'id')
 		},
 
 		sortFun : function(a,b,filterType){
@@ -56,7 +61,8 @@
 			}
 		},
 
-		renderAll : function(products){
+		renderAll : function(){
+			var products = Main.all ;
 			for(var i = 0 ; i < 1000 ; i++){
 				var renderData = products[i] ;
 				var typeArray = Main.getArray(renderData.cat);
@@ -118,7 +124,7 @@
 		},
 
 		createScoreEle : function(score){
-			return $("<span class='name' >"+score+"</span>");
+			return $("<span class='score' >"+ Math.round(score* 100)+"/100</span>");
 		},
 
 		createNameEle : function(name){
@@ -159,4 +165,5 @@
 
 	}
 })(jQuery);
+
 
