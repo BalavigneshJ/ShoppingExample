@@ -9,7 +9,13 @@
 			});
 
 			$(document).find("#filter").change(function(ev , d){
-				Main.renderWithFilter(ev);
+				Main.renderWithSorter(ev);
+			});
+
+			$(window).scroll(function() {
+				if($(window).scrollTop() + $(window).height() == $(document).height()) {
+					$($("#content").find('.showLater')[0]).removeClass("showLater") ;
+				}
 			});
 
 			Main.content = $(document).find("#content") ;
@@ -24,7 +30,7 @@
 			Main.renderer(Main[cat]);
 		},
 
-		renderWithFilter : function(ev){
+		renderWithSorter : function(ev){
 			var cat = $("#category").find('option:selected').attr('id') ;
 			var filter = $("#filter").find('option:selected').attr('id') ;
 			Main.clear();
@@ -102,6 +108,12 @@
 			for(var i=0 ; i < products.length ; i++){
 				Main.render(i , products[i]);
 			}
+
+			Main.removeEmptyCells();
+		},
+
+		removeEmptyCells : function(){
+			Main.content.find('.removeLater').remove();
 		},
 
 		render : function(index , data){
@@ -109,10 +121,15 @@
 			if(!mod){
 				Main.table = this.createTable(3,3) ;
 				Main.content.append(Main.table) ;
+
+				if(index){
+					Main.table.addClass("showLater");
+				}
 			}
 
 			var ele = $(Main.table.find('.row').find('.cell').eq(mod));
 			this.getProductElement(ele , data) ;
+			ele.removeClass("removeLater");
 		},
 
 		getProductElement  :function(ele , data){
@@ -160,10 +177,9 @@
 		},
 
 		creatCol : function(){
-			return $("<div class='cell'></div") ;
+			return $("<div class='cell removeLater'></div") ;
 		}
 
 	}
 })(jQuery);
-
 
